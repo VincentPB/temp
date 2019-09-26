@@ -1,0 +1,51 @@
+{% extends "frontend/base.html" %}
+
+{% block content %}
+
+<div>
+  <div class="card mb-3">
+    <div class="card-header">
+      Détails
+    </div>
+    <div class="card-body">
+      {{ audit.name }}
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      Graphiques
+    </div>
+    <div class="card-body">
+      This is some text within a card body.
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      Vulnérabilitiés
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Thématique</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for vuln in audit.vulnerabilities.all %}
+          <tr>
+            <th scope="row">{{ vuln.id }}</th>
+            <td>{{ vuln.name }}</td>
+            <td>{{ vuln.theme }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

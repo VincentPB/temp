@@ -1,0 +1,4 @@
+État,Nom,Note CVSS,Date,Prime (€),Porteurs,Étiquettes
+ouvert,Rupture de cloisonnement pour lire les statuts,7,5,02/07/2018,200,développeurs,contrôle des autorisations|cloisonnement
+à re-tester,Injection XSS depuis la page d’administration,3,02/07/2018,500,développeurs,traitement des paramètres|injection|XSS
+fermé,Accès ssh d’admin depuis les IPs métiers,5,12/07/2018,350,architectes,infrastructures et réseau|cloisonnement

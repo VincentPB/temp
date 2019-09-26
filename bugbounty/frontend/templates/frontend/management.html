@@ -1,0 +1,32 @@
+{% extends "frontend/base.html" %}
+
+{% block content %}
+		<nav aria-label="breadcrumb ">
+			<ol class="breadcrumb p-0 mb-3" style="background-color: #EEE;">
+				<li class="h5 breadcrumb-item active p-2 m-0">Gestion des privileges</li>
+			</ol>
+		</nav>
+
+		<div id="top-row" class="container">
+                    {% if success %}
+                    <div id="success" class="alert alert-success " role="alert">
+                        Permissions correctement mises à jour
+                    </div>
+                    {% endif %}
+		</div>
+		<!-- #top-row -->
+                <div class="row justify-content-around">
+                    <div class="col-4 text-center h5">
+                        Utilisateurs
+                    </div>
+                    <div class="col-4 text-center h5">
+                        Périmètres
+                    </div>
+                    <div class="col-4 text-center h5">
+                        Permissions
+                    </div>
+                </div>
+{% endblock %}
+
+{% block javascript_block %}
+{% endblock %}

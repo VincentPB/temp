@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="static/css/bootstrap.min.css">
+<!-- icônes iconic : cf. https://useiconic.com/open/ (documentation) -->
+<link rel="stylesheet" href="static/css/open-iconic-bootstrap.css">
+<!-- css du projet -->
+<link rel="stylesheet" href="static/css/bugbounty.css">
+<!-- titre de l`onglet -->
+<title>Injection SQL formulaire rapport</title>
+</head>
+<body>
+	<div id="top-container" class="container-fluid">
+		<div id="logo" class="text-center">
+			<img src="static/img/main_logo.png" class="img-fluid"
+				alt="Responsive image">
+		</div>
+		<!-- #logo -->
+
+		<nav aria-label="breadcrumb ">
+			<ol class="breadcrumb p-0 mb-3" style="background-color: #EEE;">
+				<li class="h5 breadcrumb-item p-2 m-0"><a href="index-habilite-finaudit.html">Tableau
+						de bord</a></li>
+				<li class="h5 breadcrumb-item p-2 m-0"><a
+					href="perimetre-1-habilite-finaudit.html"> Gestionnaire de rapports
+				</a></li>
+				<li class="h5 breadcrumb-item p-2 m-0 active" aria-current="page"
+					style="background-color: #FA5858; color: white;">Injection SQL dans le formulaire de rapport</span>
+				</li>
+			</ol>
+		</nav>
+
+		<div id="top-row" class="row">
+
+			<div id="right-col" class="col col-xl-4">
+				<div id="radar-box">
+					<p class="h5">
+						<a href="#" class="badge badge-pill badge-primary">traitement
+							des paramètres</a> <a href="#" class="badge badge-pill badge-primary">BDD</a>
+						<a href="#" class="badge badge-pill badge-primary">injection</a>
+					</p>
+
+					<div class="d-flex">
+						<div class="h5 p-1 flex-fill">
+							Ouverture : <strong>25/09/2018</strong>
+						</div>
+
+						<div class="h5 p-1 flex-fill">
+							État : <strong><span
+								class="oi oi-shield text-success"></span>&nbsp;fermé</strong>
+						</div>
+					</div>
+					
+					<div class="d-flex">
+						<div class="h5 p-1 flex-fill">
+							Porteurs&nbsp;:
+							<strong><span class="oi oi-code"></span>&nbsp;développeurs</strong>
+						</div>
+
+						<div class="h5 p-1 flex-fill">
+							Priorité&nbsp;:
+							<strong><span class="oi oi-caret-top"></span>&nbsp;haute</strong>
+						</div>
+					</div>
+
+					<canvas id="cvss-radar"></canvas>
+
+				</div>
+				<!-- #radar-box -->
+
+				<div class="mt-2">
+					<table class="table table-sm">
+					 <thead>
+					    <tr>
+					      <th scope="col" style="width: 50%">Dimension</th>
+					      <th scope="col" style="width: 50%">Valeur</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>AV − Attack Vector</td>
+					      <td class="text-danger font-weight-bold">Network</td>
+					    </tr>
+					    <tr>
+					      <td>AC − Attack Complexity</td>
+					      <td class="text-danger font-weight-bold">Low</td>
+					    </tr>
+					    <tr>
+					    	<td>PR − Privileges Required</td>
+					    	<td class="text-warning font-weight-bold">Low</td>
+					    </tr>
+					    <tr>
+					    	<td>UI − User Interaction</td>
+					    	<td class="text-danger font-weight-bold">None</td>
+					    </tr>
+					    <tr>
+					    	<td>S − Scope</td>
+					    	<td class="text-success font-weight-bold">Unchanged</td>
+					    </tr>
+					    <tr>
+					    	<td>C − Confidentiality</td>
+					    	<td class="text-danger font-weight-bold">High</td>
+					    </tr>
+					    <tr>
+					    	<td>I − Integrity</td>
+					    	<td class="text-danger font-weight-bold">High</td>
+					    </tr>
+					    <tr class="border-bottom">
+					    	<td>A − Availability</td>
+					    	<td class="text-warning font-weight-bold">Low</td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+			<!-- #right-col -->
+
+			<div id="left-col" class="col col-12 col-xl-8 border-left">
+				<div id="description">
+					<h2>Description</h2>
+
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+					accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+					quae ab illo inventore veritatis et quasi architecto beatae vitae
+					dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+					aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+					eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
+					est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+					velit, sed quia non numquam eius modi tempora incidunt ut labore et
+					dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+					quis nostrum exercitationem ullam corporis suscipit laboriosam,
+					nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure
+					reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+					consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+					pariatur?
+				</div>
+				<!-- #description -->
+
+				<hr />
+
+				<div id="demonstration">
+					<h2>Illustration</h2>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+						do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+						sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+					<img width="90%" src="uploads/vuln-1-demo.png" alt="" />
+
+					<p>Et harum quidem rerum facilis est et expedita distinctio.
+						Nam libero tempore, cum soluta nobis est eligendi optio cumque
+						nihil impedit quo minus id quod maxime placeat facere possimus,
+						omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
+						autem quibusdam et aut officiis debitis aut rerum necessitatibus
+						saepe eveniet ut et voluptates repudiandae sint et molestiae non
+						recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut
+						aut reiciendis voluptatibus maiores alias consequatur aut
+						perferendis doloribus asperiores repellat.</p>
+				</div>
+				<!-- #demonstration -->
+
+				<hr />
+
+				<div id="reproduction">
+					<h2>Mode opératoire</h2>
+
+					<p>
+						Blabla bla bla bla… commande
+						<code>awk</code>
+						bla bla…
+					</p>
+
+					<pre class="alert alert-dark"><code>% &lt;/dev/urandom base64 | head -n 10
+rD9xn0JodWkYtgjT/WuLiiPUFKbGUaQhvDS3O81dTbjLgbL4mXlritoaTmxdcGn5CVELfliH4/ix
+L2hz1PbKlEbmVfZ5rYpYx04E4ZCojhq0x/vatuWWE3ErkiByat1OzMyIZz1OUjS+7TwbSH72mNko
+lUzAoJSycHkyzVfVzAI2BDwPPhBXPi08UhRg93P8jW3X6wstC1uU0nbFeFN14mO4g9Rr8uqN04+R
+Mm7zURAXiDYplTXBBfzL658QJp40qVDd1MO6kHc9NpjEXoiPLphfbBqPVVU980sxZAe6Sl3PLDUb
+qVV+dZRy16fnRtJxASAuoN4ZkrFk+uqkOMdzydqiBLQMmeBpBZonKbEs9kxOOOskcfs5RCykuRUQ
+W3viyk0knJqYRKrVvrONl0dWDE3Wrau5eWlxpL+ce+Pprvns1Jf7zjT1RlTRyBDZXFTViGUTRUaw
+rTfYB3mmrXLcUZFdfLslYvaIE0vwu4R1h3l0AerH9nT4PIKf/0qdlF5MfgPz8QoYBwCW7BYfwHjc
+TxCg9bI6Ddc7klxwMR3vthVhtgrc9vH0qx88Z5Z7j/hPSvnO6kr8vT042zJJdR7ilkGIhL/rHEyR
+yHkh7YZ1lVKRa+rP1qpQf0xgtVPVvQQsBCeM30y7jEp5NNgrpvBeOhtPxXuqBODqO4t/GMdNgGV0
+k9RPs6kh0Pn7MxT2Rdbm5hXkkXpSOSggRqEyGWTMVmzjLIxx5hmXBEkG7bYItd9Rezs8ReBkgXn/</code></pre>
+
+				</div>
+				<!-- #reproduction -->
+
+				<hr />
+
+				<div id="recommandation">
+					<div class="d-flex">
+						<h2 class="pr-4">Recommandation</h2>
+						<div class="pr-4 align-self-center">
+							Porteurs&nbsp;:
+							<strong><span class="oi oi-code"></span>&nbsp;développeurs</strong>
+						</div>
+
+						<div class="d-fill align-self-center">
+							Priorité&nbsp;:
+							<strong><span class="oi oi-caret-top"></span>&nbsp;haute</strong>
+						</div>
+					</div>
+					<p>At vero eos et accusamus et iusto odio dignissimos ducimus
+						qui blanditiis praesentium voluptatum deleniti atque corrupti quos
+						dolores et quas molestias excepturi sint occaecati cupiditate non
+						provident, similique sunt in culpa qui officia deserunt mollitia
+						animi, id est laborum et dolorum fuga.</p>
+					<pre class="alert alert-dark"><code>pgrep -a -v -k python</code></pre>
+					<p></p>
+				</div>
+				<!-- #recommandation -->
+			</div>
+			<!-- #left-col -->
+		</div>
+		<!-- #top-row -->
+	</div>
+	<!-- #top-container -->
+	<!-- javascript pour bootstrap, jquery et chartjs -->
+	<script src="static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="static/js/popper.min.js" type="text/javascript"></script>
+	<script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="static/js/chart.bundle.min.js" type="text/javascript"></script>
+	<!-- calcul de score CVSS -->
+	<script src="static/js/cvsscalc30.js" type="text/javascript"></script>
+	<script src="static/js/bugbounty-init.js" type="text/javascript"></script>
+	<script src="data/cvss-data.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var ctx = document.getElementById('cvss-radar').getContext('2d');
+		var myChart = null;
+
+		var drawCharts = function() {
+			console.log("drawing…");
+			if (myChart != null) {
+				myChart.destroy();
+			}
+			myChart = new Chart(ctx, {
+				type : 'radar',
+				data : cvssData,
+				options : {
+					responsive : true,
+					legend : {
+						display : false
+					},
+					title : {
+						fontSize : 18,
+						display : false,
+						text : 'Détail CVSS'
+					},
+					scale : {
+						pointLabels : {
+							fontSize : 10,
+						},
+						ticks : {
+							display : false,
+							beginsAtZero : true
+						}
+					}
+				}
+			});
+		}
+
+		$(window).ready(drawCharts);
+		$(window).resize(function() {
+			console.log("resizing…");
+			drawCharts();
+		});
+	</script>
+</body>
+</html>

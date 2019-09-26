@@ -1,0 +1,376 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}Gestionnaire de rapports de contrôle trade-audit.client.tld{% endblock %}
+
+{% block content %}
+		<nav aria-label="breadcrumb ">
+			<ol class="breadcrumb p-0 mb-3" style="background-color: #EEE;">
+				<li class="h5 breadcrumb-item p-2 m-0"><a href="/dashboard">Tableau de bord</a></li>
+				<li class="h5 breadcrumb-item active p-2 m-0"
+					style="background-color: #FFBF00; color: white;"
+					aria-current="page">Gestionnaire de rapports
+				</li>
+			</ol>
+		</nav>
+
+		<div id="top-row" class="row">
+			<div id="left-col" class="col col-xl-4">
+				<div class="h5">
+					<a href="#" class="badge badge-primary">finaudit</a> <a href="#"
+						class="badge badge-pill badge-secondary">avec compte</a>
+				</div>
+
+				<div id="budget-date-row" class="d-flex">
+					<div id="date-col" class="h5 p-1 flex-fill">
+						Début : <strong>25/05/2018</strong>
+					</div>
+					<!-- #date-col -->
+
+					<div id="budget-col" class="h5 p-1 flex-fill">
+						<div class="text-center">
+							Dépensé : <strong>2 200 €</strong> / 10 000 €
+						</div>
+					</div>
+					<!-- #budget-col -->
+				</div>
+				<!-- #budget-date-row -->
+
+				<div id="charts" class="row p-2">
+					<div id="categories-chart" class="col col-12 col-md-6 col-xl-12">
+						<canvas id="myChart" style="width: 100%"></canvas>
+					</div>
+					<!-- #categories-chart -->
+					<div id="pie-chart" class="col col-12 col-md-6 col-xl-12">
+						<canvas id="myChart2" style="width: 100%"></canvas>
+					</div>
+					<!-- #pie-chart -->
+				</div>
+				<!-- #charts -->
+			</div>
+			<!-- #left-col -->
+
+			<div id="right-col" class="col col-xl-8 border-left">
+				<div id="description-box">
+					<p id="description-text" class="lead mb-2">
+						Ce périmètre correspond au site web
+						<code>www.trade-audit.client.tld</code>
+						et à toutes ses dépendances, ainsi qu’aux services ssh et ftp de
+						l’hôte
+						<code>trade-audit.client.tld</code>
+						. Le site web permet aux contrôleurs financiers de mettre en
+						forme, classer et partager à qui de droit leurs rapports.
+					</p>
+					<!-- #description-text -->
+
+					<hr class="mb-1 mt-1"/>
+
+					<div id="urls-persons" class="d-flex flex-column flex-md-row">
+						<div id="description-urls" class="flex-fill p-1">
+							Les <strong>URLS concernées</strong> sont :
+							<ul id="description-urls-list">
+								<li><code>https://www.trade-audit.client.tld</code></li>
+								<li><code>https://static.trade-audit.client.tld</code></li>
+								<li><code>https://admin.trade-audit.client.tld</code></li>
+								<li><code>ftp://trade-audit.client.tld</code></li>
+								<li><code>ssh://trade-audit.client.tld</code></li>
+							</ul>
+							<!-- #description-url-list -->
+						</div>
+						<!-- #description-urls -->
+
+						<div id="description-accounts" class="flex-fill p-1">
+							Les <strong>comptes</strong> fournis sont :
+
+							<ul id="description-accounts-list">
+								<li><code>webaudit-audit</code> pour l’interface web avec
+									les privilèges d’un auditeur</li>
+								<li><code>webaudit-manager</code> pour l’interface web avec
+									les privilèges d’un superviseur</li>
+							</ul>
+							<!-- #description-accounts-list -->
+						</div>
+						<!-- #description-accounts -->
+					</div>
+					<!-- #url-persons -->
+
+					<hr class="mb-3 mt-0"/>
+
+				</div>
+				<!-- #description-box -->
+
+				<div class="row">
+					<div class="col col-md-8 col-lg-9">
+						<form id="search-form" action="">
+							<div class="form-group">
+								<label class="sr-only" for="search-form-input">Rechercher…</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<span class="oi oi-magnifying-glass"></span>
+										</div>
+									</div>
+									<input type="text" class="form-control" id="search-form-input"
+										placeholder="Rechercher…">
+									<div class="input-group-append">
+										<button type="button" class="btn btn-outline-secondary"
+											aria-label="Close">
+											<span class="oi oi-x"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="col col-md-4 col-lg-3">
+						<div class="dropdown">
+						  <button class="btn btn-block btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Exporter la sélection
+						  </button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						    <a class="dropdown-item" target="_blank" href="/static/downloads/export-bugbounty.csv">Format CSV</a>
+						    <a class="dropdown-item" target="_blank" href="/static/downloads/export-bugbounty.pdf">Format PDF</a>
+						    <a class="dropdown-item" target="_blank" href="/static/downloads/export-bugbounty-html.zip">Format HTML</a>
+						  </div>
+						</div>
+					</div>
+				</div>
+
+				<table id="vuln-table" class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col"><span class="oi oi-caret-bottom text-dark"></span></th>
+							<th scope="col"><span class="oi oi-caret-bottom text-dark"></span></th>
+							<th scope="col"><span class="oi oi-caret-bottom text-dark"></span> Nom</th>
+							<th scope="col">
+								<span class="oi oi-caret-bottom text-dark"></span>
+								<span data-toggle="tooltip" data-placement="top" title="note">N</span>
+							</th>
+							<th scope="col"><span class="oi oi-caret-bottom text-dark"></span> Date</th>
+							<th scope="col"><span class="oi oi-caret-bottom text-dark"></span> €</th>
+							<th scope="col">
+								<span class="oi oi-caret-bottom text-dark"></span>
+								<span data-toggle="tooltip" data-placement="top" title="porteurs">P</span>
+							</th>
+							<th scope="col" style="max-width: 25%">Étiquettes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							onclick="window.location.href = window.location.pathname = '/vulnerability?id=1';">
+							<td>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value=""
+										id="vuln-1-checkbox">
+								</div>
+							</td>
+							<td data-toggle="tooltip" data-placement="left" title="fermé">
+								<span class="oi oi-shield text-success"></span>
+							</td>
+							<td class="font-weight-bold">Injection SQL dans le formulaire de rapport</td>
+							<td class="font-weight-bold text-center"
+								style="background-color: #FA5858; color: white">7,5</td>
+							<td>25/09/2018</td>
+							<td>800€</td>
+							<td><span class="oi oi-code" data-toggle="tooltip" data-placement="right" title="développeurs"></span></td>
+							<td>
+								<a href="#" class="badge badge-pill badge-primary">traitement des paramètres</a>
+								<a href="#" class="badge badge-pill badge-primary">BDD</a>
+								<a href="#" class="badge badge-pill badge-primary">injection</a>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value=""
+										id="vuln-2-checkbox">
+								</div>
+							</td>
+							<td data-toggle="tooltip" data-placement="left" title="ouvert">
+								<span class="oi oi-warning text-danger"></span>
+							</td>
+							<td class="font-weight-bold">Rupture de cloisonnement pour lire les statuts</td>
+							<td class="font-weight-bold text-center"
+								style="background-color: #F2F5A9; color: black">3,0</td>
+							<td>02/07/2018</td>
+							<td>200€</td>
+							<td><span class="oi oi-code" data-toggle="tooltip" data-placement="right" title="développeurs"></span></td>
+							<td>
+								<a href="#" class="badge badge-pill badge-primary">contrôle des autorisations</a>
+								<a href="#" class="badge badge-pill badge-primary">cloisonnement</a>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value=""
+										id="vuln-3-checkbox">
+								</div>
+							</td>
+							<td data-toggle="tooltip" data-placement="left" title="à re-tester">
+								<span class="oi oi-reload text-danger"></span>
+							</td>
+							<td class="font-weight-bold">Injection XSS depuis la page d’administration</td>
+							<td class="font-weight-bold text-center"
+								style="background-color: #FACC2E; color: black">5,0</td>
+							<td>02/07/2018</td>
+							<td>500€</td>
+							<td><span class="oi oi-code" data-toggle="tooltip" data-placement="right" title="développeurs"></span></td>
+							<td><a href="#" class="badge badge-pill badge-primary">traitement
+									des paramètres</a> <a href="#"
+								class="badge badge-pill badge-primary">injection</a> <a href="#"
+								class="badge badge-pill badge-primary">XSS</a> <a href="#"
+						</tr>
+
+						<tr>
+							<td>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value=""
+										id="vuln-3-checkbox">
+								</div>
+							</td>
+							<td data-toggle="tooltip" data-placement="left" title="fermé">
+								<span class="oi oi-shield text-success"></span>
+							</td>
+							<td class="font-weight-bold">Accès ssh d’admin depuis les IPs métiers</td>
+							<td class="font-weight-bold text-center"
+								style="background-color: #F5DA81; color: black">4,0</td>
+							<td>12/07/2018</td>
+							<td>350€</td>
+							<td><span class="oi oi-grid-three-up"  data-toggle="tooltip" data-placement="right" title="architectes"></span></td>
+							<td><a href="#" class="badge badge-pill badge-primary">infrastructures
+									et réseau</a> <a href="#" class="badge badge-pill badge-primary">cloisonnement</a>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value=""
+										id="vuln-3-checkbox">
+								</div>
+							</td>
+							<td data-toggle="tooltip" data-placement="left" title="fermé">
+								<span class="oi oi-shield text-success"></span>
+							</td>
+							<td class="font-weight-bold">Mentions légales incomplètes</td>
+							<td class="font-weight-bold text-center"
+								style="background-color: #F5DA81; color: black">4,0</td>
+							<td>12/07/2018</td>
+							<td>350€</td>
+							<td><span class="oi oi-cog" data-toggle="tooltip" data-placement="right" title="exploitants"></span></td>
+							<td>
+								<a href="#" class="badge badge-pill badge-primary">conformité légale</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- #vuln-table -->
+			</div>
+			<!-- #right-col" -->
+		</div>
+		<!-- #top-row -->
+	</div>
+	<!-- #top-container -->
+{% endblock %}
+
+{% block javascript_block %}
+	<script src="/static/data/perimetre-1-barData.js" type="text/javascript"></script>
+	<script src="tatic/data/perimetre-1-pieData.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		Chart.defaults.global.plugins.datalabels.display = function(context) {
+			var value = context.dataset.data[context.dataIndex];
+			return value === 0 ? false : true;
+		};
+		Chart.defaults.global.legend.onClick = function() {
+		};
+
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var pieCtx = document.getElementById('myChart2').getContext('2d');
+		var myChart = null;
+		var myPieChart = null;
+
+		var drawCharts = function() {
+			console.log("drawing…");
+			if (myChart != null) {
+				myChart.destroy();
+			}
+			myChart = new Chart(ctx, {
+				type : 'horizontalBar',
+				data : barData,
+				options : {
+					title : {
+						display : true,
+						fontSize: 20,
+						text : 'Vulnérabilités découvertes'
+					},
+					tooltips : {
+						mode : 'index',
+						intersect : false
+					},
+					responsive : true,
+					legend : {
+						position : 'bottom'
+					},
+					scales : {
+						xAxes : [ {
+							stacked : true,
+							ticks : {
+								stepSize : 1
+							}
+						} ],
+						yAxes : [ {
+							stacked : true,
+							ticks : {
+								stepSize : 1
+							}
+						} ]
+					}
+				}
+			});
+			if (myPieChart != null) {
+				myPieChart.destroy();
+			}
+			myPieChart = new Chart(pieCtx, {
+				type : 'doughnut',
+				data : pieData,
+				options : {
+					title : {
+						display : false,
+					},
+					tooltips : {
+						mode : 'index',
+						intersect : false
+					},
+					responsive : true,
+					legend : {
+						display : false,
+					},
+				    plugins: {
+				    	datalabels: {
+				    		font: {
+				    			size: 25
+				    		}
+				    	},
+				    	doughnutlabel: {
+				          labels: [pieData.datasets[0].data.reduce(function (a, b) {return a + b;}, 0)],
+				          font: {
+				                      size: '40',
+				                      family: 'Helvetica, sans-serif',
+				                      weight: 'bold'
+				          },
+				          color: 'grey'
+				        }
+				   }
+				}
+			});
+		};
+		$(window).ready(drawCharts);
+		$(window).resize(function() {
+			console.log("resizing…");
+			drawCharts();
+		});
+	</script>
+{% endblock %}

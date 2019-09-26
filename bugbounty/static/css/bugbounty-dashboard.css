@@ -1,0 +1,30 @@
+.card-number {
+}
+.card-number-maj {
+	color: red;
+}
+.card-number-mod {
+	color: orange;
+}
+.card-number-min {
+	color: #e6e600;
+}
+.card-bb {
+	background-color: #fff;
+	border-width: 1px;
+	width: 20em;
+	min-height: 10em;
+}
+.card-body-bb {
+	padding: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+/* .card-header-bb {
+	min-height: 3em;
+} */
+.entity-bar {
+	writing-mode: vertical-lr;
+	text-orientation: sideways;
+	/*text-orientation: sideways; */
+}
